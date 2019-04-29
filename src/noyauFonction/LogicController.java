@@ -219,8 +219,11 @@ public class LogicController {
 				&& routeController.getCurrentEtat().equals("EtatChosenShip")
 				&& gameType == 1) {
 			System.out.println(chosenX+", "+chosenY+" : "+chosenAction);
+//			if()
 		} else {
 			LOGGER.info("Problem at identifyShip function!!!");
 		}
 	}
+	
+	
 }

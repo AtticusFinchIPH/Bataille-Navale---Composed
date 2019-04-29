@@ -35,4 +35,6 @@ public interface IJoueur extends IDeplacer, IEclair {
 	public INavire getNavire(ENavire enav);
 	public ICase getCase(int posX, int posY);
 	
+	public void alAttaqueRandom(IJoueur adverse);
+	public INavire getRandomNavire();
 }

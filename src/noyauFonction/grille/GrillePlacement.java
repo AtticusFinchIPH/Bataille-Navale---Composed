@@ -513,6 +513,27 @@ public class GrillePlacement extends Grille implements IGrilleP {
 		return getNavire(enav,0);
 	}
 
+	public INavire getRandomNavire() {
+
+ 		List<ENavire> listENavire = new ArrayList<ENavire>();
+		listENavire.add(ENavire.ContreTorpilleur);
+		listENavire.add(ENavire.Croiseur);
+		listENavire.add(ENavire.PorteAvion);
+		listENavire.add(ENavire.SousMarin);
+		listENavire.add(ENavire.Torpilleur);
+
+ 		ENavire enav;
+		int i = (int) (Math.random() * listENavire.size());
+		enav = listENavire.get(i);
+
+ 		if(!this.getMapnavire().keySet().contains(enav)) {
+			i = (int) (Math.random() * listENavire.size());
+			enav = listENavire.get(i);
+		}
+
+ 		return getNavire(enav,0);
+
+ 	}
 
 	public void addNavire(INavire nav, ICase caze, boolean ori) {
 		addNavire(nav, caze.getPosX(), caze.getPosY(), ori);

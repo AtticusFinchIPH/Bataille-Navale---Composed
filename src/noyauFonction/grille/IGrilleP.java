@@ -31,4 +31,6 @@ public interface IGrilleP extends IDeplacer, IGrille {
 	public INavire getNavire(ENavire enav);
 	public INavire getNavire(ENavire enav,int i);
 	public void estAttaque();
+	
+	public INavire getRandomNavire();
 }

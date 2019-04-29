@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import noyauFonction.caze.CaseMer;
 import noyauFonction.caze.CaseNavire;
 import noyauFonction.caze.ICase;
 import noyauFonction.grille.GrilleMemoire;
@@ -14,6 +13,8 @@ import noyauFonction.grille.IGrilleP;
 import noyauFonction.navires.typeNavire.ContreTorpilleur;
 import noyauFonction.navires.typeNavire.Croiseur;
 import noyauFonction.navires.ENavire;
+import noyauFonction.navires.attaquesNavire.AttaqueClassique;
+import noyauFonction.navires.attaquesNavire.AttaqueEnCroix;
 import noyauFonction.navires.typeNavire.INavire;
 import noyauFonction.navires.typeNavire.PorteAvion;
 import noyauFonction.navires.typeNavire.SousMarin;
@@ -25,8 +26,8 @@ import noyauFonction.navires.typeNavire.Voilier;
  */
 public abstract class AbsJoueur implements IJoueur{
 
-	private final IGrilleP grillep;
-	private final IGrilleM grillem;
+	private IGrilleP grillep;
+	private IGrilleM grillem;
 	private final static Logger LOGGER = Logger.getLogger(AbsJoueur.class.getName());
 
 	public AbsJoueur() {
@@ -62,6 +63,26 @@ public abstract class AbsJoueur implements IJoueur{
 //		}
 //	}
 
+//	}
+	
+	/*Yin: 
+	 * 
+	addRandomNavires will only be used at the beginning of each game,
+	and when one player is created, it will add randomly two voiliers directly,
+	it doesn't need delete anything since the player hasn't placed anything in the grille.
+	And if you wanna clean the grille and start a new game, you must assure not only all cases are caseMer,
+	but also listNavire(HashMap Navire) has been cleaned. So to my opinion the simple way is,
+	to create two new grilles and abandon the former ones as the function reset below.
+	If you want to restart a game, both players have to use this function to reset.
+	*/
+//	public void resetGame() {
+//		grillep = new GrillePlacement();
+//		grillem = new GrilleMemoire();
+//
+//		//initialer les deux voiliers
+//		grillep.addRandomNavires(new Voilier(), new Voilier());
+//	}	//	}
+	
 	public void addRandomNavire(INavire nav) {
 		grillep.addRandomNavire(nav);
 	}
@@ -126,6 +147,28 @@ public abstract class AbsJoueur implements IJoueur{
 	public void alAttaque(INavire nav, IJoueur adverse, ICase caze) {
 		alAttaque(nav, adverse, caze.getPosX(), caze.getPosY());
 	}
+	
+	public void alAttaqueRandom(IJoueur adverse) {
+		int posX, posY;
+		posX = (int) (Math.random() * 10);
+		posY = (int) (Math.random() * 10);
+
+ 		//to choose randomly type of attack
+		int trueOrFalse;
+		trueOrFalse = (int) (Math.random() * 2);
+
+ 		INavire nav;
+		nav = this.getRandomNavire();
+
+ 		if (trueOrFalse == 1) {
+			nav.setCompoAttaque(new AttaqueClassique());
+		} else {
+			nav.setCompoAttaque(new AttaqueEnCroix());
+		}
+
+ 		alAttaque(nav, adverse, posX, posY);
+	}
+	
 	//	public void estAttaque() {
 	//		for(INavire nav : grillep.getLnavire()) {
 	//			nav.renouvelerEtatNavire();
@@ -135,6 +178,10 @@ public abstract class AbsJoueur implements IJoueur{
 	
 	public INavire getNavire(ENavire enav) {
 		return grillep.getNavire(enav);
+	}
+	
+	public INavire getRandomNavire() {
+		return grillep.getRandomNavire();
 	}
 	
 	public ICase getCase(int posX, int posY) {
