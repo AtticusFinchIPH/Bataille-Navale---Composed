@@ -227,9 +227,20 @@ public class LogicController {
 			System.out.println(chosenShip);
 			if(chosenShip == null) {
 				routeController.commandLeadToEtatSleeping();
-				routeController.commandSetInfoLabel("Invalid Case!!! Chosen case must belong to a ship!");
+				routeController.commandSetInfoLabel("Invalid Case!!!"+"\n"+"Chosen case must belong to a ship!");
 			} else if (chosenShip != null && chosenAction.equals("Normal Attack")) {
 				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction);				
+			} else if (chosenShip != null && chosenAction.equals("Cross Attack")) {
+				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction+"."
+						+"\n"+"Attention, you will lose 3 turns for this type of attack!");
+			} else if(chosenShip != null && chosenAction.equals("Flare Shot")) {
+				if(chosenShip.equals("SousMarin")) {
+					routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction+"."
+							+"\n"+"Attention, you will lose 5 turns for this!");
+				} else {
+					routeController.commandLeadToEtatSleeping();
+					routeController.commandSetInfoLabel("Invalid Case!!!"+"\n"+chosenAction+" begins only from a Sous Marin!");
+				}
 			}
 			// TODO : Consider case when ship couldn't attack
 		} else {

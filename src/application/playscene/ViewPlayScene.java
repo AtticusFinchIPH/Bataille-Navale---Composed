@@ -83,6 +83,7 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
                 	String oldValue, String newValue) {
             	if (newValue != null) {
             		System.out.println(newValue);
+            		presPlayScene.setEtatCourant(presPlayScene.getEtatSleeping());
             		presPlayScene.changePlayAction(newValue);
             	}
         	}
