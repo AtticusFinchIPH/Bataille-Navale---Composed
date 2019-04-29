@@ -40,7 +40,7 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
 		presPlayScene = pres;
 		
 		playerLabel = new Label("Player 1 begins his turn");
-		infoLabel = new Label("Choose an action below to begin your turn");
+		infoLabel = new Label("Choose action/ship to begin your turn");
 		
 		placementLabel = new Label("Grille Placement");
 		presGrillePlacement = new PresGrillePlacement();
@@ -130,6 +130,12 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
 	@Override
 	public void notifyDrawCroisseurShip(int posX, int posY) {
 		this.grillePlacement.drawCroisseurShip(posX, posY);
+		
+	}
+
+	@Override
+	public void notifySetInfoLabel(String info) {
+		infoLabel.setText(info);
 		
 	}
 

@@ -79,11 +79,14 @@ public class PresentationPlayScene {
 	 */
 	public void chosenCasePlacement(int chosenX, int chosenY) {
 		try {
+			
 			etatCourant.chooseShip();
 			routeController.setCurrentPlayer(1);
 			routeController.setCurrentView(viewPlayScene);
 			routeController.setCurrentEtat(etatChosenShip);
 			routeController.notifyChosenCase(chosenX, chosenY, modelPlayScene.getChosenAction());
+
+			
 		} catch (PlaySceneException e) {
 		}
 		
@@ -119,6 +122,10 @@ public class PresentationPlayScene {
 	
 	public void notifyDrawCroisseurShip(int posX, int posY) {
 		viewPlayScene.notifyDrawCroisseurShip(posX, posY);
+	}
+	
+	public void notifySetInfoLabel(String info) {
+		viewPlayScene.notifySetInfoLabel(info);
 	}
 	
 	//----------Gestion Automate

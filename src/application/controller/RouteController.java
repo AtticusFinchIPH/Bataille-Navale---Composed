@@ -265,6 +265,16 @@ public class RouteController {
 	public void commandEndPlacement() {
 		presPlacement.notifyEndPlacement();
 	}
+	
+	// For Play Scene
+	public void commandLeadToEtatSleeping() {
+		presPlay.setEtatCourant(presPlay.getEtatSleeping());
+	}
+	
+	public void commandSetInfoLabel(String info) {
+		presPlay.notifySetInfoLabel(info);
+	}
+	
 	/*
 	 * Those functions're called by logicController
 	 * to command Main

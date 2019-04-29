@@ -19,5 +19,11 @@ public class EtatChosenShip extends AbstractEtatPlayScene{
 		pres.setEtatCourant(pres.getEtatAttacked());
 		LOGGER.info("Pass to EtatAttacked");
 	}
+	
+//	@Override
+//	public void leadTo() throws PlaySceneException {
+//		pres.setEtatCourant(pres.getEtatSleeping());
+//		LOGGER.info("Pass to EtatSleepingPlay");
+//	}
 
 }

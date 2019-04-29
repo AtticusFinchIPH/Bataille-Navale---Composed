@@ -26,9 +26,13 @@ public class LogicController {
 	
 	private int gameType = 0;
 	
+	private int turnCount;
+	
 	public LogicController(RouteController routeController) {
 		// TODO Initialize logical elements
 		this.routeController = routeController;
+		gameType = 0;
+		turnCount = 0;
 	}
 	
 	// Receive from Starter
@@ -219,11 +223,63 @@ public class LogicController {
 				&& routeController.getCurrentEtat().equals("EtatChosenShip")
 				&& gameType == 1) {
 			System.out.println(chosenX+", "+chosenY+" : "+chosenAction);
-//			if()
+			String chosenShip = findShip(chosenX, chosenY);
+			System.out.println(chosenShip);
+			if(chosenShip == null) {
+				routeController.commandLeadToEtatSleeping();
+				routeController.commandSetInfoLabel("Invalid Case!!! Chosen case must belong to a ship!");
+			} else if (chosenShip != null && chosenAction.equals("Normal Attack")) {
+				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction);				
+			}
+			// TODO : Consider case when ship couldn't attack
 		} else {
 			LOGGER.info("Problem at identifyShip function!!!");
 		}
 	}
 	
-	
+	private String findShip(int chosenX, int chosenY) {
+		
+		ENavire enaContreTorpilleur = ENavire.ContreTorpilleur;
+		ENavire enaCroiseur = ENavire.Croiseur;
+		ENavire enaPorteAvion = ENavire.PorteAvion;
+		ENavire enaSousMarin = ENavire.SousMarin;
+		ENavire enaTorpilleur = ENavire.Torpilleur;
+		
+		for(CaseNavire caseNav: this.player1.getGrillep().getNavire(enaContreTorpilleur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			if(chosenX == posX && chosenY == posY) {
+				return "ContreTorpilleur";
+			}
+		}
+		for(CaseNavire caseNav: this.player1.getGrillep().getNavire(enaCroiseur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			if(chosenX == posX && chosenY == posY) {
+				return "Croiseur";
+			}
+		}
+		for(CaseNavire caseNav: this.player1.getGrillep().getNavire(enaPorteAvion).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			if(chosenX == posX && chosenY == posY) {
+				return "PorteAvion";
+			}
+		}
+		for(CaseNavire caseNav: this.player1.getGrillep().getNavire(enaSousMarin).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			if(chosenX == posX && chosenY == posY) {
+				return "SousMarin";
+			}
+		}
+		for(CaseNavire caseNav: this.player1.getGrillep().getNavire(enaTorpilleur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			if(chosenX == posX && chosenY == posY) {
+				return "Torpilleur";
+			}
+		}
+		return null;
+	}
 }
