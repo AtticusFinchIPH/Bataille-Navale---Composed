@@ -161,7 +161,12 @@ public class RouteController {
 	
 	// Play Scene
 	public void notifyChosenCase(int chosenX, int chosenY, String chosenAction) {
-		logicController.identifyShip(chosenX, chosenY, chosenAction);
+		if(currentEtat.equals("EtatChosenShip")) {
+			logicController.identifyShip(chosenX, chosenY, chosenAction);
+		}
+		if(currentEtat.equals("EtatAttacked")) {
+			System.out.println(chosenX+", "+chosenY+" : "+chosenAction);
+		}
 	}
 	
 	/*

@@ -241,6 +241,14 @@ public class LogicController {
 					routeController.commandLeadToEtatSleeping();
 					routeController.commandSetInfoLabel("Invalid Case!!!"+"\n"+chosenAction+" begins only from a Sous Marin!");
 				}
+			} else if (chosenShip != null && chosenAction.equals("Shift Ship")) {
+				// TODO : Check shift condition
+				routeController.commandLeadToEtatSleeping();
+				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction
+							+"\n"+"Choose case to move to");
+				// TODO : Function to shift ship
+			} else if (chosenShip != null && chosenAction.equals("Rotate Ship")) {
+				// TODO : Rotate ship
 			}
 			// TODO : Consider case when ship couldn't attack
 		} else {
@@ -249,6 +257,7 @@ public class LogicController {
 	}
 	
 	private String findShip(int chosenX, int chosenY) {
+		// TODO : Consider case when ship couldn't attack
 		
 		ENavire enaContreTorpilleur = ENavire.ContreTorpilleur;
 		ENavire enaCroiseur = ENavire.Croiseur;

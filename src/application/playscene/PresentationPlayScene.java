@@ -78,18 +78,29 @@ public class PresentationPlayScene {
 	 * to notify RouteController
 	 */
 	public void chosenCasePlacement(int chosenX, int chosenY) {
-		try {
-			
+		try {			
 			etatCourant.chooseShip();
 			routeController.setCurrentPlayer(1);
 			routeController.setCurrentView(viewPlayScene);
 			routeController.setCurrentEtat(etatChosenShip);
 			routeController.notifyChosenCase(chosenX, chosenY, modelPlayScene.getChosenAction());
-
 			
 		} catch (PlaySceneException e) {
-		}
-		
+		}		
+	}
+	
+	public void chosenCaseMemoire(int chosenX, int chosenY) {
+		if(etatCourant.equals(etatChosenShip)) {
+			try {		
+				etatCourant.shoot();
+				routeController.setCurrentPlayer(2);
+				routeController.setCurrentView(viewPlayScene);
+				routeController.setCurrentEtat(etatAttacked);
+				routeController.notifyChosenCase(chosenX, chosenY, modelPlayScene.getChosenAction());
+				
+			} catch (PlaySceneException e) {
+			}
+		}				
 	}
 	
 	/*

@@ -11,7 +11,7 @@ public class PresGrilleMemoire implements IPresGrille{
 	private	PresentationPlayScene presPlayScene;
 	
 	public PresGrilleMemoire() {
-		// TODO Auto-generated constructor stub
+		modelGrilleMemoire = new ModelGrilleMemoire();
 	}
 	
 	public void setView(final IViewGrilleMemoire viewGrilleMemoire) {
@@ -28,7 +28,8 @@ public class PresGrilleMemoire implements IPresGrille{
 
 	@Override
 	public void chosenCase(int posX, int posY) {
-		// TODO Auto-generated method stub
-		
+		modelGrilleMemoire.setChosenX(posX);
+		modelGrilleMemoire.setChosenY(posY);
+		presPlayScene.chosenCaseMemoire(modelGrilleMemoire.getChosenX(), modelGrilleMemoire.getChosenY());
 	}
 }
