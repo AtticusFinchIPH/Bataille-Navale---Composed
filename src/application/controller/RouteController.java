@@ -283,6 +283,11 @@ public class RouteController {
 		presPlay.notifySetInfoLabel(info);
 	}
 	
+	// For End Scene
+	public void commandShowWinner(String winner) {
+		presEnd.informWinner(winner);
+	}
+	
 	/*
 	 * Those functions're called by logicController
 	 * to command Main

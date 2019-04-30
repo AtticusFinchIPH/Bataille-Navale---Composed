@@ -20,7 +20,6 @@ public class GrilleMemoire extends Grille implements IGrilleM {
 
 	private List<Pion> lpion;
 
-
 	public GrilleMemoire() {
 		super();
 		lpion = new ArrayList<Pion>();

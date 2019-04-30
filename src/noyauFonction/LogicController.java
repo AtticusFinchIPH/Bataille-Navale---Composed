@@ -35,15 +35,12 @@ public class LogicController {
 	private int turnCounter;
 	private int succesHitCounter;
 	
-	private Boolean endGame;
-	
 	public LogicController(RouteController routeController) {
 		// TODO Initialize logical elements
 		this.routeController = routeController;
 		gameType = 0;
 		turnCounter = 0;
 		succesHitCounter = 0;
-		endGame = false;
 	}
 	
 	// Receive from Starter
@@ -365,23 +362,43 @@ public class LogicController {
 			switch (chosenAction) {
 			case "Normal Attack":
 				player1NormalAttack(attackingShip, posX, posY);
-				// Computer plays 1 turn
+				if (isEndGame(player2)) {
+					showWinner("You win !!!");
+				} else {
+					// Computer plays 1 turn
+					computerRandomAttack();
+				}			
 				break;
 			case "Cross Attack":
 				player1CrossAttack(attackingShip, posX, posY);
-				// Computer plays 3 turns
+				if (isEndGame(player2)) {
+					showWinner("You win !!!");
+				} else {
+					// Computer plays 3 turns
+					for(int i=0; i<3; i++) {
+						computerRandomAttack();
+					}
+				}
 				break;
 			case "Flare Shot" :
 				player1FlareShot(attackingShip, posX, posY);
 				// Computer plays 5 turns
+				for(int i=0; i<5; i++) {
+					computerRandomAttack();				
+				}
 				break;
 			default:
 				break;
 			}
 		}
-		// TODO
-		if(endGame == true) {
-			letEndGame();
+		// If game continues...
+		if(!isEndGame(player1) && !isEndGame(player2)) {
+			// TODO : Back to EtatSleeping, Back to PlayScene, Show new Grilles
+			routeController.commandLeadToEtatSleeping();
+			routeController.commandChangeView();		
+			showPlacedShips();
+			showPlacementShot();
+			showMemoireShot();
 		}
 	}
 	
@@ -450,10 +467,46 @@ public class LogicController {
 			player1.aLEclair( player2, posX, posY);
 	}
 	
-	private void letEndGame() {
-		// TODO : Show winner
-		routeController.setCurrentView(routeController.getPresEnd().getViewEnd());
-		routeController.commandChangeView();
+	private void computerRandomAttack() {
+		turnCounter++;
+		player2.alAttaqueRandom(player1);
+		if (isEndGame(player1)) {
+			showWinner("Computer wins !!!");
+		}
 	}
 	
+	private Boolean isEndGame(IJoueur player) {
+		ENavire enaContreTorpilleur = ENavire.ContreTorpilleur;
+		ENavire enaCroiseur = ENavire.Croiseur;
+		ENavire enaPorteAvion = ENavire.PorteAvion;
+		ENavire enaSousMarin = ENavire.SousMarin;
+		ENavire enaTorpilleur = ENavire.Torpilleur;
+
+		if(player.getGrillep().getNavire(enaTorpilleur) == null
+				&& player.getGrillep().getNavire(enaContreTorpilleur) == null
+				&& player.getGrillep().getNavire(enaCroiseur) == null
+				&& player.getGrillep().getNavire(enaPorteAvion) == null
+				&& player.getGrillep().getNavire(enaSousMarin) == null) {
+			return true;
+		}
+		return false;
+	}
+	
+	private void showWinner(String winner) {
+		routeController.setCurrentView(routeController.getPresEnd().getViewEnd());
+		routeController.commandChangeView();
+		routeController.commandShowWinner(winner);
+	}
+	
+	// Show ships are shot on GrillePlacement
+	private void showPlacementShot() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	// Show shot place on GrilleMemoire
+	private void showMemoireShot() {
+		// TODO Auto-generated method stub
+
+	}
 }

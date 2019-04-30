@@ -10,8 +10,7 @@ public class PresentationEnd {
 	private RouteController routeController;
 	
 	public PresentationEnd() {
-		modelEnd = new ModelEnd();
-		
+		modelEnd = new ModelEnd();		
 	}
 	
 	public void setView(IViewEnd viewEnd) {
@@ -24,5 +23,9 @@ public class PresentationEnd {
 	
 	public void setRouteController(RouteController routeController) {
 		this.routeController = routeController;
+	}
+	
+	public void informWinner(String winner) {
+		viewEnd.informWinner(winner);
 	}
 }
