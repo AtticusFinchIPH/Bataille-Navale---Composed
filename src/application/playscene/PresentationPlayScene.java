@@ -93,7 +93,7 @@ public class PresentationPlayScene {
 		if(etatCourant.equals(etatChosenShip)) {
 			try {		
 				etatCourant.shoot();
-				routeController.setCurrentPlayer(2);
+				routeController.setCurrentPlayer(1);
 				routeController.setCurrentView(viewPlayScene);
 				routeController.setCurrentEtat(etatAttacked);
 				routeController.notifyChosenCase(chosenX, chosenY, modelPlayScene.getChosenAction());

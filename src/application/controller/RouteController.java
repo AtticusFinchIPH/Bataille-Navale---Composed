@@ -46,6 +46,7 @@ public class RouteController {
 	private String previousEtat, currentEtat;
 	
 	private int chosenCaseX, chosenCaseY;
+	private String attackingShip;
 	
 	// Connection to Presentations
 	private PresentationStarter presStarter;
@@ -61,6 +62,7 @@ public class RouteController {
 		currentPlayer = 1;
 		currentView = "ViewStarter";
 		currentEtat = "EtatVide";
+		
 	}
 	
 	public void setCurrentPlayer(int currentPlayer) {
@@ -162,10 +164,11 @@ public class RouteController {
 	// Play Scene
 	public void notifyChosenCase(int chosenX, int chosenY, String chosenAction) {
 		if(currentEtat.equals("EtatChosenShip")) {
-			logicController.identifyShip(chosenX, chosenY, chosenAction);
+			attackingShip = logicController.identifyShip(chosenX, chosenY, chosenAction);
 		}
 		if(currentEtat.equals("EtatAttacked")) {
 			System.out.println(chosenX+", "+chosenY+" : "+chosenAction);
+			logicController.shootExecution(attackingShip, chosenX, chosenY, chosenAction);
 		}
 	}
 	

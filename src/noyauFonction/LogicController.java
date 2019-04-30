@@ -13,7 +13,13 @@ import noyauFonction.joueur.Humain;
 import noyauFonction.joueur.IJoueur;
 import noyauFonction.joueur.Ordinateur;
 import noyauFonction.navires.ENavire;
+import noyauFonction.navires.attaquesNavire.AttaqueEnCroix;
+import noyauFonction.navires.typeNavire.ContreTorpilleur;
+import noyauFonction.navires.typeNavire.Croiseur;
 import noyauFonction.navires.typeNavire.INavire;
+import noyauFonction.navires.typeNavire.PorteAvion;
+import noyauFonction.navires.typeNavire.SousMarin;
+import noyauFonction.navires.typeNavire.Torpilleur;
 
 public class LogicController {
 	
@@ -26,13 +32,18 @@ public class LogicController {
 	
 	private int gameType = 0;
 	
-	private int turnCount;
+	private int turnCounter;
+	private int succesHitCounter;
+	
+	private Boolean endGame;
 	
 	public LogicController(RouteController routeController) {
 		// TODO Initialize logical elements
 		this.routeController = routeController;
 		gameType = 0;
-		turnCount = 0;
+		turnCounter = 0;
+		succesHitCounter = 0;
+		endGame = false;
 	}
 	
 	// Receive from Starter
@@ -193,14 +204,14 @@ public class LogicController {
 			System.out.println("Torpilleur-Green:" +posX+", "+posY);
 		}
 		
-		for(int i=0; i<10; i++) {
-			for(int j=0; j<10; j++) {
-				ICase caze = this.player1.getGrillep().getCaze(i, j);
-				if(caze instanceof CaseNavire) {
-					System.out.println(i+", "+j);
-				}
-			}
-		}
+//		for(int i=0; i<10; i++) {
+//			for(int j=0; j<10; j++) {
+//				ICase caze = this.player1.getGrillep().getCaze(i, j);
+//				if(caze instanceof CaseNavire) {
+//					System.out.println(i+", "+j);
+//				}
+//			}
+//		}
 	}
 
 	// Auto place ships for computer
@@ -213,11 +224,48 @@ public class LogicController {
 			routeController.setCurrentView(routeController.getPresPlay().getViewPlayScene());
 			routeController.commandChangeView();
 			showPlacedShips();
+			showComputerShips();
+		}
+	}
+	
+	private void showComputerShips() {
+		ENavire enaContreTorpilleur = ENavire.ContreTorpilleur;
+		ENavire enaCroiseur = ENavire.Croiseur;
+		ENavire enaPorteAvion = ENavire.PorteAvion;
+		ENavire enaSousMarin = ENavire.SousMarin;
+		ENavire enaTorpilleur = ENavire.Torpilleur;
+		
+		System.out.println();
+		System.out.println("Computer Placement Ships :");
+		for(CaseNavire caseNav: this.player2.getGrillep().getNavire(enaContreTorpilleur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();;
+			System.out.println("ContreTorpilleur-Purple:" +posX+", "+posY);
+		}
+		for(CaseNavire caseNav: this.player2.getGrillep().getNavire(enaCroiseur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			System.out.println("Croisseur-Yellow:" +posX+", "+posY);
+		}
+		for(CaseNavire caseNav: this.player2.getGrillep().getNavire(enaPorteAvion).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			System.out.println("PorteAvion-Gray:" +posX+", "+posY);
+		}
+		for(CaseNavire caseNav: this.player2.getGrillep().getNavire(enaSousMarin).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			System.out.println("SousMarin-GreenYellow:" +posX+", "+posY);
+		}
+		for(CaseNavire caseNav: this.player2.getGrillep().getNavire(enaTorpilleur).getLcaseNav()) {
+			int posX = caseNav.getPosX();
+			int posY = caseNav.getPosY();
+			System.out.println("Torpilleur-Green:" +posX+", "+posY);
 		}
 	}
 	
 	// Identify which Ship is chosen for this attacking
-	public void identifyShip(int chosenX, int chosenY, String chosenAction) {
+	public String identifyShip(int chosenX, int chosenY, String chosenAction) {
 		if(routeController.getCurrentPlayer() == 1 
 				&& routeController.getCurrentView().equals("ViewPlayScene")
 				&& routeController.getCurrentEtat().equals("EtatChosenShip")
@@ -244,19 +292,24 @@ public class LogicController {
 			} else if (chosenShip != null && chosenAction.equals("Shift Ship")) {
 				// TODO : Check shift condition
 				routeController.commandLeadToEtatSleeping();
-				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction
-							+"\n"+"Choose case to move to");
+//				routeController.commandSetInfoLabel(chosenShip+" prepares for "+chosenAction
+//							+"\n"+"Choose case to move to");
+				routeController.commandSetInfoLabel("This function is on working process. \n Please choose other action!");
 				// TODO : Function to shift ship
 			} else if (chosenShip != null && chosenAction.equals("Rotate Ship")) {
 				// TODO : Rotate ship
+				routeController.commandLeadToEtatSleeping();
+				routeController.commandSetInfoLabel("This function is on working process. \n Please choose other action!");
 			}
+			return chosenShip;
 			// TODO : Consider case when ship couldn't attack
 		} else {
 			LOGGER.info("Problem at identifyShip function!!!");
+			return null;
 		}
 	}
 	
-	private String findShip(int chosenX, int chosenY) {
+	public String findShip(int chosenX, int chosenY) {
 		// TODO : Consider case when ship couldn't attack
 		
 		ENavire enaContreTorpilleur = ENavire.ContreTorpilleur;
@@ -302,4 +355,105 @@ public class LogicController {
 		}
 		return null;
 	}
+	
+	// Execution the attack
+	public void shootExecution(String attackingShip, int posX, int posY, String chosenAction) {
+		if(routeController.getCurrentPlayer() == 1 
+				&& routeController.getCurrentView().equals("ViewPlayScene")
+				&& routeController.getCurrentEtat().equals("EtatAttacked")
+				&& gameType == 1) {
+			switch (chosenAction) {
+			case "Normal Attack":
+				player1NormalAttack(attackingShip, posX, posY);
+				// Computer plays 1 turn
+				break;
+			case "Cross Attack":
+				player1CrossAttack(attackingShip, posX, posY);
+				// Computer plays 3 turns
+				break;
+			case "Flare Shot" :
+				player1FlareShot(attackingShip, posX, posY);
+				// Computer plays 5 turns
+				break;
+			default:
+				break;
+			}
+		}
+		// TODO
+		if(endGame == true) {
+			letEndGame();
+		}
+	}
+	
+	private void player1NormalAttack(String attackingShip, int posX, int posY) {
+		INavire iContreTorpilleur = new ContreTorpilleur();
+		INavire iCroiseur = new Croiseur();
+		INavire iPOrteAvion = new PorteAvion();
+		INavire iSousMarin = new SousMarin();
+		INavire iTorpilleur = new Torpilleur();
+		
+		switch (attackingShip) {
+		case "ContreTorpilleur":
+			player1.alAttaque(iContreTorpilleur, player2, posX, posY);
+			break;
+		case "Croiseur":
+			player1.alAttaque(iCroiseur, player2, posX, posY);
+			break;
+		case "PorteAvion":
+			player1.alAttaque(iPOrteAvion, player2, posX, posY);
+			break;
+		case "SousMarin":
+			player1.alAttaque(iSousMarin, player2, posX, posY);
+			break;
+		case "Torpilleur":
+			player1.alAttaque(iTorpilleur, player2, posX, posY);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void player1CrossAttack(String attackingShip, int posX, int posY) {
+		INavire iContreTorpilleur = new ContreTorpilleur();
+		INavire iCroiseur = new Croiseur();
+		INavire iPOrteAvion = new PorteAvion();
+		INavire iSousMarin = new SousMarin();
+		INavire iTorpilleur = new Torpilleur();
+		
+		switch (attackingShip) {
+		case "ContreTorpilleur":
+			iContreTorpilleur.setCompoAttaque(new AttaqueEnCroix());
+			player1.alAttaque(iContreTorpilleur, player2, posX, posY);
+			break;
+		case "Croiseur":
+			iCroiseur.setCompoAttaque(new AttaqueEnCroix());
+			player1.alAttaque(iCroiseur, player2, posX, posY);
+			break;
+		case "PorteAvion":
+			iPOrteAvion.setCompoAttaque(new AttaqueEnCroix());
+			player1.alAttaque(iPOrteAvion, player2, posX, posY);
+			break;
+		case "SousMarin":
+			iSousMarin.setCompoAttaque(new AttaqueEnCroix());
+			player1.alAttaque(iSousMarin, player2, posX, posY);
+			break;
+		case "Torpilleur":
+			iTorpilleur.setCompoAttaque(new AttaqueEnCroix());
+			player1.alAttaque(iTorpilleur, player2, posX, posY);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void player1FlareShot(String attackingShip, int posX, int posY) {
+			player1.aLEclair( player2, posX, posY);
+	}
+	
+	private void letEndGame() {
+		// TODO : Show winner
+		routeController.setCurrentView(routeController.getPresEnd().getViewEnd());
+		routeController.commandChangeView();
+	}
+	
 }
