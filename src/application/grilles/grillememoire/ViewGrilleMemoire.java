@@ -28,4 +28,22 @@ public class ViewGrilleMemoire extends GridPane implements IViewGrilleMemoire{
 			}
 		}
 	}
+	
+	@Override
+	public void drawAttaqueEmpty(int posX, int posY) {
+		viewCaze[posX][posY].drawAttaqueEmpty(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
+	
+	@Override
+	public void drawBrokenShip(int posX, int posY) {
+		viewCaze[posX][posY].drawBrokenShip(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
+	
+	@Override
+	public void drawDestroyedShip(int posX, int posY) {
+		viewCaze[posX][posY].drawDestroyedShip(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
 }

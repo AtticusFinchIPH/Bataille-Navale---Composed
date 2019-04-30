@@ -28,7 +28,11 @@ public class Pion {
 
 	public int getPosY() {
 		return posY;
-	}	
+	}
+	
+	public ECouleur getCou() {
+		return cou;
+	}
 	
 	@Override
 	public String toString() {

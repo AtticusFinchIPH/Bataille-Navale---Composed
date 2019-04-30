@@ -8,7 +8,7 @@ package noyauFonction.pion;
  */
 public enum ECouleur {
 	
-	blanc(0), rouge(1);
+	blue(0), orange(1), red(2);
 
 	private int valeurcouleur;
 

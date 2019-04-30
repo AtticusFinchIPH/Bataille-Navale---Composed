@@ -1,5 +1,7 @@
 package noyauFonction.caze;
 
+import noyauFonction.pion.ECouleur;
+
 public interface IEstAttaque {
-	public boolean estAttaque(final int puiss);
+	public ECouleur estAttaque(final int puiss);
 }

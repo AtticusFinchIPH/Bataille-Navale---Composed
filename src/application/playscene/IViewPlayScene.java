@@ -12,5 +12,13 @@ public interface IViewPlayScene extends IView{
 	public void notifyDrawPorteAvionShip(int posX, int posY);
 	public void notifyDrawCroisseurShip(int posX, int posY);
 	
+	public void notifyDrawAttaqueEmpty(int posX, int posY);
+	public void notifyDrawBrokenShip(int posX, int posY);
+	public void notifyDrawDestroyedShip(int posX, int posY);
+	
+	public void notifyDrawAttaqueEmptyMemoire(int posX, int posY);
+	public void notifyDrawBrokenShipMemoire(int posX, int posY);
+	public void notifyDrawDestroyedShipMemoire(int posX, int posY);
+	
 	public void notifySetInfoLabel(String info);
 }

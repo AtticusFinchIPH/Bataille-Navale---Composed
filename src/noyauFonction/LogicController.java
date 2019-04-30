@@ -20,6 +20,8 @@ import noyauFonction.navires.typeNavire.INavire;
 import noyauFonction.navires.typeNavire.PorteAvion;
 import noyauFonction.navires.typeNavire.SousMarin;
 import noyauFonction.navires.typeNavire.Torpilleur;
+import noyauFonction.pion.ECouleur;
+import noyauFonction.pion.Pion;
 
 public class LogicController {
 	
@@ -500,13 +502,31 @@ public class LogicController {
 	
 	// Show ships are shot on GrillePlacement
 	private void showPlacementShot() {
-		// TODO Auto-generated method stub
-
+		for(Pion pion: player2.getGrillem().getLpion()) {
+			int posX = pion.getPosX();
+			int posY = pion.getPosY();
+			if(pion.getCou().equals(ECouleur.red)) {
+				routeController.commandShowDestroyedShip(posX, posY);
+			} else if (pion.getCou().equals(ECouleur.orange)) {
+				routeController.commandShowBrokenShip(posX, posY);
+			} else {
+				routeController.commandShowAttaqueEmpty(posX, posY);
+			}
+		}
 	}
 	
 	// Show shot place on GrilleMemoire
 	private void showMemoireShot() {
-		// TODO Auto-generated method stub
-
+		for(Pion pion: player1.getGrillem().getLpion()) {
+			int posX = pion.getPosX();
+			int posY = pion.getPosY();
+			if(pion.getCou().equals(ECouleur.red)) {
+				routeController.commandShowDestroyedShipMemoire(posX, posY);
+			} else if (pion.getCou().equals(ECouleur.orange)) {
+				routeController.commandShowBrokenShipMemoire(posX, posY);
+			} else {
+				routeController.commandShowAttaqueEmptyMemoire(posX, posY);
+			}
+		}
 	}
 }

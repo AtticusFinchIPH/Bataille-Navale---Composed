@@ -107,6 +107,7 @@ public class PresentationPlayScene {
 	 * Those functions're called by RouteController
 	 * to command View 
 	 */
+	// For Grille Placement
 	public void notifyDrawInitAllShips() {
 		viewPlayScene.notifyDrawInitAllShips();
 	}
@@ -135,6 +136,32 @@ public class PresentationPlayScene {
 		viewPlayScene.notifyDrawCroisseurShip(posX, posY);
 	}
 	
+	public void notifyDrawAttaqueEmpty(int posX, int posY) {
+		viewPlayScene.notifyDrawAttaqueEmpty(posX, posY);
+	}
+	
+	public void notifyDrawBrokenShip(int posX, int posY) {
+		viewPlayScene.notifyDrawBrokenShip(posX, posY);
+	}
+	
+	public void notifyDrawDestroyedShip(int posX, int posY) {
+		viewPlayScene.notifyDrawDestroyedShip(posX, posY);
+	}
+	
+	// For Grille Memoire
+	public void notifyDrawAttaqueEmptyMemoire(int posX, int posY) {
+		viewPlayScene.notifyDrawAttaqueEmptyMemoire(posX, posY);
+	}
+	
+	public void notifyDrawBrokenShipMemoire(int posX, int posY) {
+		viewPlayScene.notifyDrawBrokenShipMemoire(posX, posY);
+	}
+	
+	public void notifyDrawDestroyedShipMemoire(int posX, int posY) {
+		viewPlayScene.notifyDrawDestroyedShipMemoire(posX, posY);
+	}
+	
+	// For Label
 	public void notifySetInfoLabel(String info) {
 		viewPlayScene.notifySetInfoLabel(info);
 	}

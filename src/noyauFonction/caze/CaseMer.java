@@ -2,6 +2,8 @@ package noyauFonction.caze;
 
 import java.util.logging.Logger;
 
+import noyauFonction.pion.ECouleur;
+
 /**
  * une case qui represente la mer
  * 
@@ -17,9 +19,9 @@ public class CaseMer extends Case {
 		super(positionX, positionY);
 	}
 
-	public boolean estAttaque(int puiss) {
+	public ECouleur estAttaque(int puiss) {
 		LOGGER.info("tir dans la mer "+ this.toString());
-		return false;
+		return ECouleur.blue;
 	}
 	
 	@Override

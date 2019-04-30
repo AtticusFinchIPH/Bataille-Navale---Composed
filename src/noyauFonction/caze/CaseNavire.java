@@ -8,6 +8,7 @@ import noyauFonction.caze.automateCase.etatsCase.ActionCaseNonPermiseException;
 import noyauFonction.caze.automateCase.etatsCase.EnDetruit;
 import noyauFonction.caze.automateCase.etatsCase.EnNormal;
 import noyauFonction.caze.automateCase.etatsCase.EnTouche;
+import noyauFonction.pion.ECouleur;
 /**
  * une case qui represent la navire
  * 
@@ -47,29 +48,29 @@ public class CaseNavire extends Case implements IGestionEtatCaseN {
 	}
 
 	
-	public boolean estAttaque(int puiss) {
+	public ECouleur estAttaque(int puiss) {
 		LOGGER.info("tir dans une case navire "+this.toString());
 		if (this.getNvie() > puiss) {
 			try {
 				this.setNvie(this.getNvie() - puiss);
 				LOGGER.info(this.toString() + " est touche ");
 				etatCourant.subirAttaque(); 
-				return true;
+				return ECouleur.orange;
 				//pion rouge
 			} catch (ActionCaseNonPermiseException e) {
 				LOGGER.info(this.toString()+e.getMessage());
-				return false;
+				return ECouleur.blue;
 			}
 		} else {
 			try {
 				this.setNvie(0);
 				LOGGER.info(this.toString() + " est detruit ");
 				etatCourant.toDetruit();  
-				return true;
+				return ECouleur.red;
 				//pion rouge
 			} catch (ActionCaseNonPermiseException e) {
 				LOGGER.info(this.toString()+e.getMessage());
-				return false;
+				return ECouleur.blue;
 			}
 			
 		}

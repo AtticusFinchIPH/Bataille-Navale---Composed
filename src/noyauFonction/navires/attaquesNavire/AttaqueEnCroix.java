@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import noyauFonction.caze.ICase;
 import noyauFonction.joueur.IJoueur;
+import noyauFonction.pion.ECouleur;
 
 /**
  * Attaque en plus de la ICase désignée, les ICases haut, bas, gauche et droite sont touchées
@@ -26,9 +27,8 @@ public class AttaqueEnCroix extends AbsAttaque {
 		LOGGER.info(joueur+ " attaque en Croix a la case:"+caze.toString()+" de " +adverse);
 		
 		int puiss1 = checkbombe(adverse, posX, posY, puiss);
-		boolean a = caze.estAttaque(puiss1);
-		joueur.getGrillem().addPion(caze, a);
-		
+		ECouleur a = caze.estAttaque(puiss1);
+		joueur.getGrillem().addPion(caze, a);		
 		try {
 			ICase cazehaut = adverse.getGrillep().getCaze(posX, posY+1);
 			int puiss2 = checkbombe(adverse, posX, posY+1, puiss);

@@ -25,21 +25,28 @@ public class GrilleMemoire extends Grille implements IGrilleM {
 		lpion = new ArrayList<Pion>();
 	}
 
-	public void addPion(int posX, int posY, boolean tir) {
-		if(tir == true) {
-			Pion pion = new Pion(posX, posY, ECouleur.rouge);
+	public void addPion(int posX, int posY, ECouleur tir) {
+		if(tir == ECouleur.red) {
+			Pion pion = new Pion(posX, posY, ECouleur.red);
+			lpion.add(pion);
+			LOGGER.info("ajouter un pion "+pion.toString());
+		} else if (tir == ECouleur.orange) {
+			Pion pion = new Pion(posX, posY, ECouleur.orange);
 			lpion.add(pion);
 			LOGGER.info("ajouter un pion "+pion.toString());
 		} else {
-			Pion pion = new Pion(posX, posY, ECouleur.blanc);
+			Pion pion = new Pion(posX, posY, ECouleur.blue);
 			lpion.add(pion);
 			LOGGER.info("ajouter un pion "+pion.toString());
 		}
 	}
 
-	public void addPion(ICase caze, boolean tir) {
+	public void addPion(ICase caze, ECouleur tir) {
 		addPion(caze.getPosX(),caze.getPosY(),tir);
 	}
 
+	public List<Pion> getLpion() {
+		return lpion;
+	}
 
 }

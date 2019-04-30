@@ -73,4 +73,22 @@ public class ViewGrillePlacement extends GridPane implements IViewGrillePlacemen
 		viewCaze[posX][posY].drawCroisseur(viewCaze[posX][posY].getGraphicsContext2D());
 		
 	}
+	
+	@Override
+	public void drawAttaqueEmpty(int posX, int posY) {
+		viewCaze[posX][posY].drawAttaqueEmpty(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
+	
+	@Override
+	public void drawBrokenShip(int posX, int posY) {
+		viewCaze[posX][posY].drawBrokenShip(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
+	
+	@Override
+	public void drawDestroyedShip(int posX, int posY) {
+		viewCaze[posX][posY].drawDestroyedShip(viewCaze[posX][posY].getGraphicsContext2D());
+		
+	}
 }

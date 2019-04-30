@@ -283,6 +283,44 @@ public class RouteController {
 		presPlay.notifySetInfoLabel(info);
 	}
 	
+	// For Play Scene (Grille Placement)
+	public void commandShowAttaqueEmpty(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawAttaqueEmpty(posX, posY);
+		}
+	}
+	
+	public void commandShowBrokenShip(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawBrokenShip(posX, posY);
+		}
+	}
+	
+	public void commandShowDestroyedShip(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawDestroyedShip(posX, posY);
+		}
+	}
+	
+	// For Play Scene (Grille Memoire)
+	public void commandShowAttaqueEmptyMemoire(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawAttaqueEmptyMemoire(posX, posY);
+		}
+	}
+	
+	public void commandShowBrokenShipMemoire(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawBrokenShipMemoire(posX, posY);
+		}
+	}
+	
+	public void commandShowDestroyedShipMemoire(int posX, int posY) {
+		if(currentView.equals("ViewPlayScene")) {
+			presPlay.notifyDrawDestroyedShipMemoire(posX, posY);
+		}
+	}
+	
 	// For End Scene
 	public void commandShowWinner(String winner) {
 		presEnd.informWinner(winner);

@@ -10,4 +10,7 @@ public interface IViewGrillePlacement {
 	public void drawPorteAvionShip(int posX, int posY);
 	public void drawCroisseurShip(int posX, int posY);
 	
+	public void drawAttaqueEmpty(int posX, int posY);
+	public void drawBrokenShip(int posX, int posY);
+	public void drawDestroyedShip(int posX, int posY);
 }

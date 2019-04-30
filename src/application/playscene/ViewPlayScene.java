@@ -133,10 +133,47 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
 		this.grillePlacement.drawCroisseurShip(posX, posY);
 		
 	}
+	
 
 	@Override
 	public void notifySetInfoLabel(String info) {
 		infoLabel.setText(info);
+		
+	}
+
+	@Override
+	public void notifyDrawAttaqueEmpty(int posX, int posY) {
+		this.grillePlacement.drawAttaqueEmpty(posX, posY);
+		
+	}
+
+	@Override
+	public void notifyDrawBrokenShip(int posX, int posY) {
+		this.grillePlacement.drawBrokenShip(posX, posY);
+		
+	}
+
+	@Override
+	public void notifyDrawDestroyedShip(int posX, int posY) {
+		this.grillePlacement.drawDestroyedShip(posX, posY);
+		
+	}
+
+	@Override
+	public void notifyDrawAttaqueEmptyMemoire(int posX, int posY) {
+		this.grilleMemoire.drawAttaqueEmpty(posX, posY);
+		
+	}
+
+	@Override
+	public void notifyDrawBrokenShipMemoire(int posX, int posY) {
+		this.grilleMemoire.drawBrokenShip(posX, posY);
+		
+	}
+
+	@Override
+	public void notifyDrawDestroyedShipMemoire(int posX, int posY) {
+		this.grilleMemoire.drawDestroyedShip(posX, posY);
 		
 	}
 
