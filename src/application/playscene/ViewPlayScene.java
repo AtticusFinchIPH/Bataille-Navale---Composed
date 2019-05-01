@@ -33,6 +33,7 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
     = FXCollections.observableArrayList("Normal Attack", "Cross Attack", "Flare Shot", "Shift Ship", "Rotate Ship");
 	private ChoiceBox<String> actionList;
 	private Button improveBtn;
+	private Label shipsPlacementLabel, shipsMemoireLabel;
 	private VBox leftBox, rightBox;
 	private HBox grillesBox;
 	
@@ -51,8 +52,13 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
 		actionLabel = new Label("Actions");
 		actionList = new ChoiceBox(stringActionList);
 		actionList.setValue("Normal Attack");
+		shipsPlacementLabel = new Label("Green : Torpilleur\n"
+				+ "GreenYellow : Sous Marin\n"
+				+ "Purple : Contre Torpilleur\n"
+				+ "Gray : Porte Avion\n"
+				+ "Yellow : Croiseur");
 		
-		leftBox = new VBox(placementLabel, grillePlacement, actionLabel, actionList);
+		leftBox = new VBox(placementLabel, grillePlacement, actionLabel, actionList, shipsPlacementLabel);
 		leftBox.setSpacing(20);
 		leftBox.setAlignment(Pos.CENTER);
 		
@@ -65,8 +71,12 @@ public class ViewPlayScene extends VBox implements IViewPlayScene{
 		bonusLabel = new Label("Bonus");
 		improveBtn = new Button("Improve Defense");
 		improveBtn.setDisable(true);
+		shipsMemoireLabel = new Label("White : Untouched Case\n"
+				+ "Blue : Ocean\n"
+				+ "Orange : Broken Ship\n"
+				+ "Red : Destroyed Ship\n\n");
 		
-		rightBox = new VBox(memoireLabel, grilleMemoire, bonusLabel, improveBtn);
+		rightBox = new VBox(memoireLabel, grilleMemoire, bonusLabel, improveBtn, shipsMemoireLabel);
 		rightBox.setSpacing(20);
 		rightBox.setAlignment(Pos.CENTER);
 		
